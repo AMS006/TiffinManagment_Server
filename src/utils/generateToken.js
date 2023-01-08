@@ -13,7 +13,8 @@ const generateToken = (res,statusCode,user,isUser) =>{
         expires : new Date(
             Date.now() + 5 * 24 * 60 * 60 * 1000
         ),
-        secure:false,
+        secure:env.ENVIRONMENT === 'LIVE',
+        sameSite: env.ENVIRONMENT === 'LIVE' ? 'none' : 'lax',
         httpOnly:true
     }
     if(text === "userToken")
