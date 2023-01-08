@@ -4,7 +4,7 @@
   "description": "Tiffin Server Application",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./src/index.js"
+    "start": "npm run build && nodemon ./src/index.js"
   },
   "author": "Anas Kunal Aniket",
   "license": "ISC",
