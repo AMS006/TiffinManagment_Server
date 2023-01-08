@@ -1,3 +1,4 @@
+const env = require('dotenv')
 const generateToken = (res,statusCode,user,isUser) =>{
     try{
         let token = ''
