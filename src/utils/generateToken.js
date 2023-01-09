@@ -16,7 +16,7 @@ const generateToken = (res,statusCode,user,isUser) =>{
         ),
         secure:env.ENVIRONMENT === 'LIVE',
         sameSite: env.ENVIRONMENT === 'LIVE' ? 'none' : 'lax',
-        httpOnly:true
+        httpOnly:false
     }
     if(text === "userToken")
        return res.status(statusCode).cookie(text,token, options).json({success:true, user})
