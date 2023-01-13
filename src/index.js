@@ -20,7 +20,7 @@ env.config();
 app.use(cors({
     origin: 'https://tiffin-managment-client.vercel.app', 
     methods: ['GET', 'PUT', 'POST','DELETE'], 
-    credentials: true,
+    credentials: true
 }))
 app.use(express.json())
 app.use(cookieParser())
