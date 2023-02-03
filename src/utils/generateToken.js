@@ -1,4 +1,3 @@
-const env = require('dotenv')
 const generateToken = (res,statusCode,user,isUser) =>{
     try{
         let token = ''
@@ -15,8 +14,6 @@ const generateToken = (res,statusCode,user,isUser) =>{
             Date.now() + 5 * 24 * 60 * 60 * 1000
         ),
         secure:true,
-        maxAge:3600000*5,
-        sameSite:'none',
         httpOnly:true
     }
     if(text === "userToken")
