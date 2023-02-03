@@ -18,7 +18,7 @@ const generateToken = (res,statusCode,user,isUser) =>{
     }
     if(text === "userToken")
        return res.status(statusCode).cookie(text,token, options).json({success:true, user})
-
+    else
        return res.status(statusCode).cookie(text,token, options).json({success:true, provider:user})
     }catch(error){
         return res.status(500).json({message:error.message});
