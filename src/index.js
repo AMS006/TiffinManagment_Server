@@ -18,12 +18,9 @@ const app = express()
 env.config();
 
 app.use(cors({
-    origin: '*', 
+    origin: ['https://tiffin-managment-client.vercel.app','http://localhost:3000'], 
     methods: ['GET', 'PUT', 'POST','DELETE'], 
-    allowedHeaders: ['Content-Type', 'Authorization', 'x-csrf-token'], 
-    credentials: true,
-    maxAge: 5000,
-    exposedHeaders: ['*', 'Authorization' ]
+    credentials: true
 }))
 app.use(express.json())
 app.use(cookieParser())
