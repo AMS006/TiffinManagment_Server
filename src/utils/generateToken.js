@@ -14,9 +14,10 @@ const generateToken = (res,statusCode,user,isUser) =>{
             expires : new Date(
                 Date.now() + 5 * 24 * 60 * 60 * 1000
             ),
-            secure:env.ENVIRONMENT === 'LIVE',
-            sameSite: env.ENVIRONMENT === 'LIVE' ? 'none' : 'lax',
-            httpOnly:false
+            secure:true,
+            maxAge:3600000*5,
+            sameSite:'none',
+            httpOnly:true
         }
         if(text === "userToken")
             return res.status(statusCode).cookie(text,token, options).json({success:true, user})
