@@ -44,12 +44,12 @@ exports.loginUser = async(req,res) =>{
 }
 exports.logoutUser = async(req,res) =>{
     try {
-        res.cookie('userToken',null,{
+        const options = {
             expires: new Date(Date.now()),
             httpOnly:true,
             maxAge:0,
-        })
-        return res.status(200).json({message:"LogOut Succeccfully"})
+        }
+        return res.status(200).cookie('userToken',null,options).json({message:"Logout Successfully"})
     } catch (error) {
         return res.status(500).json({message:error.message});
     }
