@@ -47,6 +47,7 @@ exports.logoutUser = async(req,res) =>{
         res.cookie('userToken',null,{
             expires: new Date(Date.now()),
             httpOnly:true,
+            maxAge:0,
         })
         return res.status(200).json({message:"LogOut Succeccfully"})
     } catch (error) {
