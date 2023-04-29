@@ -10,7 +10,7 @@ exports.registerProvider = async(req,res) =>{
         const providerExists = await providerModel.findOne({email})
         let providerLogo = "";
         if(req.file){
-            const location = req.file.path;
+            const location = req.file.buffer;
             const result = await uploads(location);
             providerLogo = result.url;
         }

@@ -4,20 +4,22 @@ const cloudinary = require('cloudinary')
 dotenv.config()
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key:process.env.CLOUDINARY_API_KEY,
+    api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET
 })
-
-const uploads = (file) =>{
-    return new Promise((resolve) =>{
-        cloudinary.uploader.upload(
-            file,
-            (result) =>{
-                resolve({url:result.url, id:result.public_id})
-            },
-            {folder:"TiffinManagment"},
-            {resource_type:'auto'}
-        )
-    })
+const uploads = (buffer) =>{
+    return new Promise((resolve, reject) => {
+        let stream = cloudinary.uploader.upload_stream(
+          (error, result) => {
+            console.log(result)
+            if (result) {
+              resolve(result);
+            } else {
+              reject(error);
+            }
+          }
+        );
+      streamifier.createReadStream(buffer).pipe(stream);
+    });
 }
 module.exports = uploads
