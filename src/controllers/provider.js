@@ -31,10 +31,13 @@ exports.registerProvider = async(req,res) =>{
             providerLogo
         }
         const provider = await providerModel.create(data);
-        let subject = "New Provider Registration"
-        let message = `Name: ${data.name}\n Email: ${data.email} \n Address:${data.address} \n Requested to registered`
-        await sendEmail({email:"tiffinwala4@gmail.com",subject,message})
-        // await sendEmail({email:data.email,subject:"Thank You For Registring with Us", message:"You Will Be Notified Shortly After We Verify You"})
+
+        // Disabled Email for authorization
+
+        // let subject = "New Provider Registration"
+        // let message = `Name: ${data.name}\n Email: ${data.email} \n Address:${data.address} \n Requested to registered`
+        // // await sendEmail({email:"tiffinwala4@gmail.com",subject,message})
+        // // await sendEmail({email:data.email,subject:"Thank You For Registring with Us", message:"You Will Be Notified Shortly After We Verify You"})
         generateToken(res,201,provider,false)
     }catch (error){
         return res.status(500).json({message:error.message})
@@ -68,17 +71,6 @@ exports.getProviderDetails = async(req,res) =>{
         return res.status(200).json({provider});
     } catch (error) {
         return res.status(500).json({});
-    }
-}
-exports.logoutProvider = async(req,res) =>{
-    try {
-        res.cookie('providerToken',null,{
-            expires: new Date(Date.now()),
-            httpOnly:true,
-        })
-        return res.status(200).json({message:"Logout Succeccfully"})
-    } catch (error) {
-        return res.status(500).json({message:error.message});
     }
 }
 exports.getAllProviders = async(req,res) =>{

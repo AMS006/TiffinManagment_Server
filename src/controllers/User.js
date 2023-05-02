@@ -16,12 +16,6 @@ exports.registerUser = async(req,res) =>{
         if(isProvider)
             return res.status(400).json({message:"Try Different Email Id"})
 
-        // let providerLogo = "";
-        // if(req?.file){
-        //     const location = req.file.path;
-        //     const result = await uploads(location);
-        //     providerLogo = result.url;
-        // }
         const user = await userModel.create({name,email,password,phoneNumber});
         generateToken(res,201,user,true)
     } catch (error) {
@@ -40,18 +34,6 @@ exports.loginUser = async(req,res) =>{
         generateToken(res,200,user,true);
     } catch (error) {
         return res.status(500).json({message:error.message})
-    }
-}
-exports.logoutUser = async(req,res) =>{
-    try {
-        const options = {
-            expires: new Date(Date.now()),
-            httpOnly:true,
-            maxAge:0,
-        }
-        return res.status(200).cookie('userToken',null,options).json({message:"Logout Successfully"})
-    } catch (error) {
-        return res.status(500).json({message:error.message});
     }
 }
 exports.getUserDetails = async(req,res) =>{

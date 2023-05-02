@@ -5,7 +5,6 @@ exports.addFood = async(req,res) =>{
         const {name,isVeg,price,description,quantity} = req.body;
         let provider = req.provider._id;
         let image = ""
-        console.log(req.body);
         if(req.file){
             const location = req.file.buffer;
             const result = await uploads(location);

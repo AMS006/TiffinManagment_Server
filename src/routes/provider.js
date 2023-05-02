@@ -11,8 +11,6 @@ router.post('/register',upload.single("providerLogo"),registerProvider);
 
 router.post('/login', loginProvider);
 
-router.get('/logout', isProvider, logoutProvider);
-
 router.get('/', getAllProviders);
 
 router.get('/me',isProvider, getProviderDetails)

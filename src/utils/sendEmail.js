@@ -5,9 +5,7 @@ exports.sendEmail = async (options) =>{
         to:options.email,
         subject:options.subject,
         text:options.message
-
     }
-    console.log(options)
     const transport = nodemailer.createTransport({
         host:'smpt.gmail.com',
         port:465,

@@ -11,8 +11,6 @@ router.post('/signUp',upload.single("profilePic"),registerUser)
 
 router.post('/login', loginUser);
 
-router.get('/logout',isUser, logoutUser);
-
 router.get('/me',isUser, getUserDetails);
 
 module.exports = router
