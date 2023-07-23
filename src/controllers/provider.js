@@ -3,7 +3,7 @@ const providerModel = require('../models/provider');
 const userModel = require('../models/user')
 const generateToken = require('../utils/generateToken');
 const uploads = require('../utils/cloudinaryUpload');
-const { sendEmail } = require('../utils/sendEmail');
+// const { sendEmail } = require('../utils/sendEmail');
 exports.registerProvider = async(req,res) =>{
     try {
         const {name,email,password,phoneNumber,address} = req.body;
@@ -34,10 +34,12 @@ exports.registerProvider = async(req,res) =>{
 
         // Disabled Email for authorization
 
-        // let subject = "New Provider Registration"
-        // let message = `Name: ${data.name}\n Email: ${data.email} \n Address:${data.address} \n Requested to registered`
-        // // await sendEmail({email:"tiffinwala4@gmail.com",subject,message})
-        // // await sendEmail({email:data.email,subject:"Thank You For Registring with Us", message:"You Will Be Notified Shortly After We Verify You"})
+        // let subject = "Email Verification For Registration on Tiffin Wala "
+        // let html = `<p>Hello <b>${data.name}</b>,</p>
+        //             <p>Please verify your email Id by entering below verification code to verify your account, If this was not send by you plzz and don't share it with anyone
+        //             <h3>Verification Code: ${data.code}</h3>`
+        // await sendEmail({email:data.email,subject, html})
+
         generateToken(res,201,provider,false)
     }catch (error){
         return res.status(500).json({message:error.message})
@@ -75,7 +77,7 @@ exports.getProviderDetails = async(req,res) =>{
 }
 exports.getAllProviders = async(req,res) =>{
     try{
-        const allProviders = await providerModel.find({isAuthorized:true});
+        const allProviders = await providerModel.find();
 
         if(!allProviders.length === 0)
             return res.status(404).json({success:false});
