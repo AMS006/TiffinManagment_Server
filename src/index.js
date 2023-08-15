@@ -33,6 +33,7 @@ mongoose.connect(process.env.MONGODB_CONNECTION,{
 }).then(()=>{
     console.log("DataBase Connected")
 })
+mongoose.set('strictQuery', true)
 const updateFood = async() =>{
     const foods = await foodModel.find()
     for(let i = 0;i<foods.length;i++){
