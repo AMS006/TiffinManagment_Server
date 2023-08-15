@@ -9,23 +9,23 @@ const food = require ('./routes/foods')
 const order = require('./routes/order')
 const address = require('./routes/address');
 const review  = require('./routes/review')
-const moment = require('moment')
 
 const CronJob = require('cron').CronJob;
 const initialData = require('./routes/initialData')
 const foodModel = require('./models/food')
 
 const app = express()
+
 env.config();
+app.use(express.json())
+app.use(cookieParser())
 
 app.use(cors({
-    origin: ['https://tiffin-managment-client.vercel.app/'],
+    origin: ['https://tiffin-managment-client.vercel.app/','http://localhost:3000'],
     methods: ['GET', 'PUT', 'POST','DELETE'], 
     allowedHeaders: ['Content-Type', 'Authorization', 'x-csrf-token'], 
     credentials: true
 }))
-app.use(express.json())
-app.use(cookieParser())
 
 mongoose.connect(process.env.MONGODB_CONNECTION,{
     useNewUrlParser:true,
@@ -39,11 +39,14 @@ const updateFood = async() =>{
         await foodModel.findByIdAndUpdate(foods[i]._id,{$set:{quantity:foods[i].enteredQuantity}});
     }
 }
-const timeInSec = moment().endOf('day').valueOf()
 new CronJob('0 0 * * *', async () => {
     await updateFood()
   }, null, true, 'Asia/Kolkata');
 
+app.get('/',(req,res) =>{
+    console.log("Server Is Running")
+    }
+)
 app.use('/api/v1/user', user);
 app.use('/api/v1/provider',provider)
 app.use('/api/v1/food',food)
@@ -51,6 +54,7 @@ app.use('/api/v1/order',order)
 app.use('/api/v1/address',address);
 app.use('/api/v1/review',review);
 app.use('/api/v1/initialData',initialData)
+
 app.listen(process.env.PORT,()=>{
     console.log("Server is Running on port " + process.env.PORT)
 })
