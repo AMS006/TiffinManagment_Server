@@ -21,11 +21,12 @@ app.use(express.json())
 app.use(cookieParser())
 
 var originsWhitelist = [
-    'https://tiffin-managment-client.vercel.app/',
-    'http://localhost:3000/'
+    'https://tiffin-managment-client.vercel.app',
+    'http://localhost:3000'
  ];
  var corsOptions = {
      origin: function(origin, callback){
+        console.log(origin)
          var isWhitelisted = originsWhitelist.indexOf(origin) !== -1;
          callback(null, isWhitelisted);
      },
