@@ -20,7 +20,18 @@ env.config();
 app.use(express.json())
 app.use(cookieParser())
 
-app.use(cors())
+var originsWhitelist = [
+    'https://tiffin-managment-client.vercel.app/',
+    'http://localhost:3000/'
+ ];
+ var corsOptions = {
+     origin: function(origin, callback){
+         var isWhitelisted = originsWhitelist.indexOf(origin) !== -1;
+         callback(null, isWhitelisted);
+     },
+     credentials:true
+  }
+app.use(cors(corsOptions))
 
 mongoose.connect(process.env.MONGODB_CONNECTION,{
     useNewUrlParser:true,
