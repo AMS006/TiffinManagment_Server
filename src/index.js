@@ -26,7 +26,6 @@ var originsWhitelist = [
  ];
  var corsOptions = {
      origin: function(origin, callback){
-        console.log(origin)
          var isWhitelisted = originsWhitelist.indexOf(origin) !== -1;
          callback(null, isWhitelisted);
      },
