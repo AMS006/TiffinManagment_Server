@@ -81,9 +81,8 @@ exports.updateOrderStatus = async(req,res) =>{
             message = `Hi ${req.body.provider.name} Your Order for ${req.body.food.name} has been Cancelled by ${req.body.user.name}`
             email = req.body.provider.email
             
-            const quantity = req.body.food.quantity + req.body.quantity
             
-            await foodModel.findByIdAndUpdate(req.body.food._id,{$inc:{quantity}})
+            await foodModel.findByIdAndUpdate(req.body.food._id,{$inc:{quantity:req.body.food.quantity }})
         }
         // await sendEmail({email,subject,message});
 
